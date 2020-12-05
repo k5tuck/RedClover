@@ -1,38 +1,21 @@
-
-const http = require('http');
-const express = require('express');
-
+const http = require("http");
+const express = require("express");
+const hostname = "localhost";
+const port = 3300;
 const app = express();
+
 const serve = http.createServer(app);
 
-app.get('/', (req,res)=>{
-    res.send(`
-    <h1>Welcome to the Home Page for you favorite Anime shows!</h1>
-    `)
-})
-
-app.get('/shows',(req,res)=>{
-    res.send(`
-    <ul>
-        <li><a href="/shows/OnePunchMan">One Punch Man</a></li>
-        <li><a href="/shows/BlackClover">Black Clover</a></li>
-        <li><a href="/shows/Re:Zero">Re:Zero</a></li>
-    </ul>
-    `)
-})
-
-app.get('/shows/:showName',(req,res)=>{
-    const showName = req.params.showName
-    res.send(`
-    <h1>This page contains info for the show ${showName}!</h1>
-    <a href="/shows/">Back</a>
-    `)
-})
-
-app.get('*', (req, res) => {
-    res.send('This is not the page you are searching for')
+app.get("/", (req, res) => {
+  res.send(`
+    <h1>Welcome to the Home Page of your Future!</h1>
+    `);
 });
 
-serve.listen(3300, 'localhost', ()=> {
-    console.log(`Running on port http://localhost:3300`)
-})
+app.get("*", (req, res) => {
+  res.send("404 Error: Page Does Not Exist");
+});
+
+serve.listen(port, hostname, () => {
+  console.log(`Running on port http://${hostname}:${port}`);
+});
