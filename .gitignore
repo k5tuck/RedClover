@@ -1,4 +1,6 @@
 node_modules
 .DS_Store
 package-lock.json
-Notes.md
+notes.md
+user-story.md
+Backend.drawio
