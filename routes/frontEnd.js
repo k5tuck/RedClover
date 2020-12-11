@@ -2,21 +2,19 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  res.send(`
-        <h1>Welcome to the Home Page of your Future!</h1>
-        `);
+  res.render("Home");
 });
 router.get("/About", (req, res) => {
-  res.send(`<h1>Welcome to the About Page!</h1>`);
+  res.render("About");
 });
 router.get("/Contact", (req, res) => {
-  res.send();
+  res.render("Contact");
 });
 router.get("/Products", (req, res) => {
-  res.send();
+  res.render("Products");
 });
 router.get("/Login", (req, res) => {
-  res.send();
+  res.render("Login");
 });
 
 module.exports = router;
