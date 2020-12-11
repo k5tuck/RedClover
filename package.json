@@ -27,6 +27,5 @@
     "express-es6-template-engine": "^2.2.3",
     "helmet": "^4.2.0",
     "morgan": "^1.10.0"
-    "express-es6-template-engine": "^2.2.3"
   }
 }
