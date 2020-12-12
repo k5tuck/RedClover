@@ -10,6 +10,9 @@ const helmet = require("helmet");
 
 const logger = morgan("tiny");
 app.use(express.static("public"));
+/*Needed in order to use req.body data*/
+app.use(express.urlencoded({ extended: true }));
+/*----------------------------------------*/
 app.use(helmet());
 app.use(logger);
 

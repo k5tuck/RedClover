@@ -20,12 +20,34 @@ router.get("/Login", (req, res) => {
     },
   });
 });
+router.post("/Login", (req, res) => {
+  const { username, password } = req.body;
+  // Use req data to verify info against DB
+  res.render("");
+});
+
 router.get("/SignUp", (req, res) => {
   res.render("SignUp", {
     partials: {
       signup_form: "/partials/signupform",
     },
   });
+});
+
+router.post("/SignUp", (req, res) => {
+  const {
+    firstName,
+    lastName,
+    street,
+    additionalStreet,
+    city,
+    state,
+    zip,
+    email,
+    phone,
+  } = req.body;
+  // Use req data for DB Here
+  res.redirect(); //Send User to Page to set Username And Password
 });
 
 module.exports = router;
