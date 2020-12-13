@@ -1,18 +1,18 @@
 <h2>Login Here</h2>
-<form method="POST">
+<form action="/login" method="POST">
     <label>
         Username
-        <input type="type" name="username" placeholder="Enter Username" />
+        <input type="type" name="username" placeholder="Enter Username" autofocus required/>
     </label>
     <br>
     <label>
         Password
-        <input type="password" name="password" placeholder="Enter Password" />
+        <input type="password" name="password" placeholder="Enter Password" required/>
     </label>
     <br />
     <input type="submit" name="submit" value="Login">
     <br />
     <a href="#">Forget Your Password?</a>
     <br />
-    <a href="/SignUp">Don't Have An Account?</a>
+    <a href="/signup">Don't Have An Account?</a>
 </form>

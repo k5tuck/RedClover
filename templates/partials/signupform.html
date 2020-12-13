@@ -1,18 +1,18 @@
 <h2>Sign Up</h2>
-<form method="POST">
+<form action="/signup" method="POST">
     <label>
         First Name:
-        <input type="text" name="firstName" placeholder="Please Enter Your First Name" autofocus/>
+        <input type="text" name="firstName" placeholder="Please Enter Your First Name" autofocus required/>
     </label>
     <br />
     <label>
         Last Name:
-        <input type="text" name="lastName" placeholder="Please Enter Your Last Name"/>
+        <input type="text" name="lastName" placeholder="Please Enter Your Last Name" required />
     </label>
     <br />
     <label>
         Street Address:
-        <input type="text" name="street" placeholder="Address"/>
+        <input type="text" name="street" placeholder="Address" required/>
     </label>
     <br />
     <label>
@@ -22,30 +22,40 @@
     <br />
     <label>
         City:
-        <input type="text" name="city" placeholder="City"/>
+        <input type="text" name="city" placeholder="City" required/>
     </label>
     <br />
     <label>
         State:
-        <input type="text" name="state" placeholder="State"/>
+        <input type="text" name="state" placeholder="State" required/>
     </label>
     <br />
     <label>
         ZIP Code:
-        <input type="text" name="zip" placeholder="ZIP Code"/>
+        <input type="text" name="zip" placeholder="ZIP Code" required/>
     </label>
     <br />
     <label>
         Email:
-        <input type="text" name="email" placeholder="Email Address"/>
+        <input type="text" name="email" placeholder="Email Address" required/>
     </label>
     <br />
     <label>
         Phone:
-        <input type="text" name="phone" placeholder="Phone Number"/>
+        <input type="text" name="phone" placeholder="Phone Number" required/>
+    </label>
+    <br />
+    <label>
+        SSN or Tax ID:
+        <input type="text" name="ssn" placeholder="SSN or Tax ID" required/>
+    </label>
+    <br />
+    <label>
+        Government Passport, Voter ID, or Other Identification:
+        <input type="text" name="govtid" placeholder="GOVT ID" required/>
     </label>
     <br />
     <input type="submit" value="Create Account">
     <br />
-    <a href="/Login">Already Have An Account?</a>
+    <a href="/login">Already Have An Account?</a>
 </form>
