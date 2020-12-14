@@ -1,8 +1,24 @@
 <h2>Sign Up</h2>
 <form action="/signup" method="POST">
     <label>
+        Username:
+        <input type="text" name="username" placeholder="Username" autofocus required/>
+    </label>
+    <br />
+    <label>
+        Password:
+        <input type="password" name="password" placeholder="Password" required/>
+    </label>
+    <br />
+    <label>
+        Verify Password:
+        <input type="password" name="verifyPassword" placeholder="Verify Password" required/>
+    </label>
+    <br />
+    <br />
+    <label>
         First Name:
-        <input type="text" name="firstName" placeholder="Please Enter Your First Name" autofocus required/>
+        <input type="text" name="firstName" placeholder="Please Enter Your First Name" required/>
     </label>
     <br />
     <label>
@@ -37,7 +53,7 @@
     <br />
     <label>
         Email:
-        <input type="text" name="email" placeholder="Email Address" required/>
+        <input type="email" name="email" placeholder="Email Address" required/>
     </label>
     <br />
     <label>
@@ -50,12 +66,20 @@
         <input type="text" name="ssn" placeholder="SSN or Tax ID" required/>
     </label>
     <br />
-    <label>
+    <label for="identification">
         Government Passport, Voter ID, or Other Identification:
-        <input type="text" name="govtid" placeholder="GOVT ID" required/>
+        <select name="identification" id=“identification”>
+            <option value=“passport”>Passport</option>
+            <option value=“voter">Voter ID</option>
+            <option value=“govt”>Government Issued ID</option>
+            <option value=“other">Other</option>
+        </select>
+        <input type="text" name="idInput" placeholder="ID Number" required/>
     </label>
     <br />
+    <br />
     <input type="submit" value="Create Account">
+    <br />
     <br />
     <a href="/login">Already Have An Account?</a>
 </form>
