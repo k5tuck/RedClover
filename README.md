@@ -1,3 +1,3 @@
 # RedClover
 
-## Bank project
+## Bank Project
