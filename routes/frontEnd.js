@@ -39,6 +39,9 @@ router.get("/signup", (req, res) => {
 router.post("/signup", async (req, res) => {
   try {
     const {
+      username,
+      password,
+      verifyPassword,
       firstName,
       lastName,
       street,
@@ -51,6 +54,7 @@ router.post("/signup", async (req, res) => {
       ssn,
       govtid,
     } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10);
     // Use req data for DB Here
     res.redirect(); //Send User to Page to set Username And Password
   } catch {}
