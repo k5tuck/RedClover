@@ -5,15 +5,19 @@ const router = express.Router();
 router.get("/", (req, res) => {
   res.render("Home");
 });
+
 router.get("/about", (req, res) => {
   res.render("About");
 });
+
 router.get("/contact", (req, res) => {
   res.render("Contact");
 });
+
 router.get("/products", (req, res) => {
   res.render("Products");
 });
+
 router
   .get("/login", (req, res) => {
     res.render("Login", {
@@ -47,6 +51,7 @@ router
       },
     });
   })
+
   .post("/signup", async (req, res) => {
     try {
       const {
