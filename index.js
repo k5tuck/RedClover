@@ -17,6 +17,8 @@ app.engine("html", es6Renderer);
 app.set("views", "templates");
 app.set("view engine", "html");
 
+app.use(express.urlencoded({extended: true}));
+
 app.use(require("./routes"));
 app.use(require("./models"));
 app.use(require("./controllers"));
