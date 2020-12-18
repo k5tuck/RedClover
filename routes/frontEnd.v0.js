@@ -48,6 +48,8 @@ router
     res.render("SignUp", {
       partials: {
         signup_form: "/partials/signupform",
+        countries: "/partials/countriesDropDown",
+        states: "/partials/statesDropDown",
       },
     });
   })
@@ -60,6 +62,7 @@ router
         verifyPassword,
         firstName,
         lastName,
+        country,
         street,
         additionalStreet,
         city,
