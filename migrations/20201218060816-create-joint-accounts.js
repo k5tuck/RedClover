@@ -1,44 +1,32 @@
 "use strict";
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable("Members", {
+    await queryInterface.createTable("Joint_Accounts", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      firstname: {
-        type: Sequelize.STRING,
-      },
-      lastname: {
-        type: Sequelize.STRING,
-      },
-      street: {
-        type: Sequelize.STRING,
-      },
-      add_street: {
-        type: Sequelize.STRING,
-      },
-      city: {
-        type: Sequelize.STRING,
-      },
-      state: {
-        type: Sequelize.STRING,
-      },
-      zip: {
+      account_number: {
         type: Sequelize.INTEGER,
+        onDelete: "CASCADE",
+        references: {
+          model: "Accounts",
+          key: "account_number",
+          as: "account_number",
+        },
       },
-      email: {
+      first_member: {
         type: Sequelize.STRING,
       },
-      phone: {
-        type: Sequelize.INTEGER,
+      second_member: {
+        type: Sequelize.STRING,
       },
-      ssn: {
-        type: Sequelize.INTEGER,
+      third_member: {
+        type: Sequelize.STRING,
       },
-      issued_id: {
+      fourth_member: {
         type: Sequelize.STRING,
       },
       createdAt: {
@@ -52,6 +40,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable("Members");
+    await queryInterface.dropTable("Joint_Accounts");
   },
 };
