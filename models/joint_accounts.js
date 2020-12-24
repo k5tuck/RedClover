@@ -18,10 +18,7 @@ module.exports = (sequelize, DataTypes) => {
   Joint_Accounts.init(
     {
       account_number: DataTypes.INTEGER,
-      first_member: DataTypes.STRING,
-      second_member: DataTypes.STRING,
-      third_member: DataTypes.STRING,
-      fourth_member: DataTypes.STRING,
+      member_id: DataTypes.STRING,
     },
     {
       sequelize,

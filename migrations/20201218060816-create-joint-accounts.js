@@ -16,18 +16,11 @@ module.exports = {
           key: "account_number",
           as: "account_number",
         },
+        allowNull: false,
       },
-      first_member: {
+      member_id: {
         type: Sequelize.STRING,
-      },
-      second_member: {
-        type: Sequelize.STRING,
-      },
-      third_member: {
-        type: Sequelize.STRING,
-      },
-      fourth_member: {
-        type: Sequelize.STRING,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
