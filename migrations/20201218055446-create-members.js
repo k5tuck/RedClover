@@ -2,11 +2,20 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable("Members", {
-      member_id: {
+      id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
+      },
+      username: {
+        allowNull: false,
+        type: Sequelize.STRING,
+        unique: true,
+      },
+      hash: {
+        allowNull: false,
+        type: Sequelize.STRING,
       },
       firstname: {
         allowNull: false,
@@ -21,6 +30,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       addt_address: {
+        allowNull: true,
         type: Sequelize.STRING,
       },
       country: {
@@ -28,13 +38,16 @@ module.exports = {
         type: Sequelize.STRING,
       },
       city: {
+        allowNull: true,
         type: Sequelize.STRING,
       },
       state: {
+        allowNull: true,
         type: Sequelize.STRING,
       },
       zip: {
-        type: Sequelize.INTEGER,
+        allowNull: true,
+        type: Sequelize.STRING,
       },
       email: {
         allowNull: false,
@@ -45,13 +58,16 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       ssn: {
+        allowNull: true,
         type: Sequelize.STRING,
       },
       govtid: {
+        allowNull: true,
         type: Sequelize.STRING,
       },
       govtnum: {
-        type: Sequelize.INTEGER,
+        allowNull: true,
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,

@@ -1,5 +1,6 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
+const { Members } = require("../models");
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -28,19 +29,28 @@ router
   })
   .post("/login", async (req, res) => {
     const { username, password } = req.body;
-    // Find user and hashed pass from DB
+    const userfound = await Members.findOne({
+      where: { username },
+    });
     if (userfound) {
       console.log("Found User");
-      const valid = await bcrypt.compareSync(password, hashedPassword);
+      const hash = userfound.hash;
+      const valid = await bcrypt.compareSync(password, hash);
       if (valid) {
-        res.redirect();
+        req.session.user = {
+          username,
+          id: userfound.member_id,
+        };
+        req.session.save(() => {
+          res.redirect("/members");
+        });
       } else {
         console.log("User doesn't exist");
-        res.redirect();
+        res.redirect("/login");
       }
     }
     // Use req data to verify info against DB
-    res.render("");
+    // res.render("");
   });
 
 router
@@ -55,30 +65,61 @@ router
   })
 
   .post("/signup", async (req, res) => {
+    const {
+      username,
+      password,
+      verifyPassword,
+      firstname,
+      lastname,
+      country,
+      address,
+      additionalStreet,
+      city,
+      state,
+      zip,
+      email,
+      phone,
+      ssn,
+      identification,
+      idInput,
+    } = req.body;
+    const salt = await bcrypt.genSaltSync(11);
+    const hash = await bcrypt.hashSync(password, salt);
+    const hashSSN = await bcrypt.hashSync(ssn, salt);
     try {
-      const {
+      const newMember = await Members.create({
         username,
-        password,
-        verifyPassword,
-        firstName,
-        lastName,
+        hash,
+        firstname,
+        lastname,
         country,
-        street,
-        additionalStreet,
+        address,
+        addt_address: additionalStreet,
         city,
         state,
         zip,
         email,
         phone,
-        ssn,
-        govtid,
-      } = req.body;
-      const salt = await bcrypt.genSaltSync(11);
-      const hashedPassword = await bcrypt.hashSync(password, salt);
-      const hashSSN = await bcrypt.hashSync(ssn, salt);
-      // Use req data for DB Here
-      res.redirect(); //Send User to Page to set Username And Password
-    } catch {}
+        ssn: hashSSN,
+        govtid: identification,
+        govtnum: idInput,
+      });
+      console.log(newMember);
+      res.redirect("/login");
+    } catch (e) {
+      if (e.name === "SequelizeUniqueConstraintError") {
+        console.log("username is taken");
+        res.redirect("/signup");
+      }
+      console.log("Error here");
+      console.log(e);
+      res.redirect("/signup");
+    }
+    console.log("Need something here");
   });
+
+router.get("/unauthorized", (req, res) => {
+  res.render("Unauthorized");
+});
 
 module.exports = router;

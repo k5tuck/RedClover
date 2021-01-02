@@ -1,14 +1,10 @@
 const express = require("express");
 const memberController = require("../controllers/member");
 const router = express.Router();
+const { requireLogin } = require("../auth");
 
-router.use("/", memberController.home);
-
-router.use("/", (req, res) => {
-  res.render("home", {
-    ...globalLocals,
-    ...globalPartials,
-  });
-});
+router.use(requireLogin);
+router.get("/", memberController.home);
+router.get("/logout", memberController.logout);
 
 module.exports = router;
