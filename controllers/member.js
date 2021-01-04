@@ -1,4 +1,5 @@
 const {} = require("../models");
+
 const globalLocals = {
   locals: {},
 };
@@ -7,10 +8,21 @@ const globalPartials = {
 };
 
 const home = (req, res) => {
-  res.render("home", {
+  res.render("Members", {
     ...globalLocals,
     ...globalPartials,
   });
 };
 
-module.exports = { home };
+// Logout Function
+const logout = (req, res) => {
+  console.log("Logging Out");
+  req.session.destroy(() => {
+    res.redirect("/");
+  });
+};
+
+module.exports = {
+  home,
+  logout,
+};

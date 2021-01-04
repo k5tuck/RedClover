@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Accounts.belongsTo(models.Users, {
+      Accounts.belongsTo(models.Members, {
         foreignKey: "memberid",
         onDelete: "CASCADE",
       });

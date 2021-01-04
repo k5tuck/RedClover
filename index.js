@@ -11,9 +11,9 @@ const helmet = require("helmet");
 
 const logger = morgan("tiny");
 app.use(express.static("public"));
-/*Needed in order to use req.body data*/
+
 app.use(express.urlencoded({ extended: true }));
-/*----------------------------------------*/
+
 app.use(helmet());
 app.use(logger);
 
@@ -22,18 +22,20 @@ app.set("views", "templates");
 app.set("view engine", "html");
 
 //Needed for Sessions
-const session = require('express-session');
-const FileStore = require('session-file-store')(session);
-app.use(session({
-    store: new FileStore(),  // no options for now
-    secret: 'asdfasdfasdfsafsafsafdasdfasdf3', // will need to be changed to  `process.env.SESSION_SECRET,` and a SESSION_SECRET added to the .env
+const session = require("express-session");
+const FileStore = require("session-file-store")(session);
+app.use(
+  session({
+    store: new FileStore(), // no options for now
+    secret: process.env.SESSION_SECRET,
     saveUninitialized: false,
     resave: true,
     rolling: true,
     cookie: {
-        maxAge: 1000 * 60 * 60 * 24 * 7
-    }
-}));
+      maxAge: 1000 * 60 * 60 * 24 * 7,
+    },
+  })
+);
 
 app.use(require("./routes"));
 // app.use(require("./models"));
