@@ -22,4 +22,7 @@ const logout = (req, res) => {
   });
 };
 
-module.exports = { home, logout };
+module.exports = {
+  home,
+  logout,
+};
