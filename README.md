@@ -41,4 +41,4 @@ There are a couple of ideas for future iterations, with more to come in the futu
 
 ## License
 
-Distributed under the MIT License. See [`LICENSE`](https://github.com/k5tuck/RedClover/blob/main/README.md) for more information.
+Distributed under the MIT License. See [`LICENSE`](https://github.com/k5tuck/RedClover/blob/main/LICENSE) for more information.
