@@ -17,7 +17,14 @@ module.exports = (sequelize, DataTypes) => {
   }
   Transactions.init(
     {
-      account_number: DataTypes.INTEGER,
+      account_number: {
+        type: DataTypes.STRING,
+        onDelete: "CASCADE",
+        references: {
+          model: "Accounts",
+          key: "account_number",
+        },
+      },
       date: DataTypes.DATE,
       merchant: DataTypes.STRING,
       amount: DataTypes.FLOAT,

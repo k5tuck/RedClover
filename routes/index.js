@@ -5,9 +5,9 @@ const error_404 = require("../controllers/frontend");
 router
   .use("/", require("./frontEnd.v0"))
   .use("/members", require("./members.v0"))
+  .use("/accounts", require("./accounts.v0"))
   .get("*", error_404.error);
 
-// .use("/trans", require("./trans.v0"))
-// .use("/accounts", require("./accounts.v0"))
+// .use("/employees", require("./employees.v0"))
 
 module.exports = router;

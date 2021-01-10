@@ -12,7 +12,7 @@ const helmet = require("helmet");
 const logger = morgan("tiny");
 app.use(express.static("public"));
 
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 
 app.use(helmet());
 app.use(logger);

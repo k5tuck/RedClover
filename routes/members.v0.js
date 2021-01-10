@@ -6,6 +6,8 @@ const { requireLogin } = require("../auth");
 router
   .use(requireLogin)
   .get("/", memberController.home)
+  .get("/mkacc", memberController.createAccount)
+  .post("/mkacc", memberController.processAcctCreation)
   .get("/logout", memberController.logout);
 
 module.exports = router;

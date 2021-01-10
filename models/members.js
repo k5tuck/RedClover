@@ -10,7 +10,10 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Members.hasMany(models.Accounts, {
-        foreignKey: "memberid",
+        foreignKey: "member_id",
+      });
+      Members.hasMany(models.Joint_Accounts, {
+        foreignKey: "member_id",
       });
     }
   }
@@ -25,12 +28,12 @@ module.exports = (sequelize, DataTypes) => {
       country: DataTypes.STRING,
       city: DataTypes.STRING,
       state: DataTypes.STRING,
-      zip: DataTypes.INTEGER,
+      zip: DataTypes.STRING,
       email: DataTypes.STRING,
-      phone: DataTypes.INTEGER,
+      phone: DataTypes.STRING,
       ssn: DataTypes.STRING,
       govtid: DataTypes.STRING,
-      govtnum: DataTypes.INTEGER,
+      govtnum: DataTypes.STRING,
     },
     {
       sequelize,

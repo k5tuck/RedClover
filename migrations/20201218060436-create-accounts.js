@@ -11,26 +11,18 @@ module.exports = {
         type: Sequelize.STRING,
       },
       account_number: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-        allowNull: false,
+        type: Sequelize.STRING,
         unique: true,
+        allowNull: false,
       },
-      memberid: {
+      member_id: {
         type: Sequelize.INTEGER,
-        onDelete: "CASCADE",
-        references: {
-          model: "Members",
-          key: "id",
-          as: "memberid",
-        },
       },
       curr_balance: {
-        type: Sequelize.FLOAT,
+        type: Sequelize.DECIMAL,
       },
       avail_balance: {
-        type: Sequelize.FLOAT,
+        type: Sequelize.DECIMAL,
       },
       createdAt: {
         allowNull: false,

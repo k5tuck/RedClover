@@ -11,11 +11,6 @@ module.exports = {
       account_number: {
         type: Sequelize.INTEGER,
         onDelete: "CASCADE",
-        references: {
-          model: "Accounts",
-          key: "account_number",
-          as: "account_number",
-        },
         allowNull: false,
       },
       member_id: {

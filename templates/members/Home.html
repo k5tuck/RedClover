@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About</title>
+  </head>
+  <body>
+    <div>
+      <h1 align="left">Welcome ${member.firstname} ${member.lastname}!</h1>
+      <div align="right">
+        <button value="submit">
+          <a href="/members/logout"> Logout </a>
+        </button>
+      </div>
+    </div>
+
+    <div>
+      <h2>Savings:</h2>
+      ${accounts.map (a=> a.account_type=="Savings" ? `
+      <div>
+        <a href="/account/${a.id}">
+          <h3>${a.account_type}</h3>
+          <h3>${a.avail_balance}</h3>
+          <br />
+          <p>${a.account_number}</p>
+          <!-- <p>${a.routing_number}</p> -->
+        </a>
+      </div>
+      ` : '' ).join("")}
+      <div align="center">
+        <h3>You have No Savings Accounts</h3>
+        <a href="/members/mkacc"><button>Create Account?</button></a>
+      </div>
+    </div>
+
+    <div>
+      <h2>Checkings:</h2>
+      ${accounts.map(a=> a.account_type=="Checking" ? `
+      <div>
+        <a href="/account/${a.id}">
+          <h3>${a.account_type}</h3>
+          <h3>${a.avail_balance}</h3>
+          <br />
+          <p>${a.account_number}</p>
+          <!-- <p>${a.account_routing}</p> -->
+        </a>
+      </div>
+      ` : '').join("")}
+      <div align="center">
+        <h3>You Have No Checking Accounts</h3>
+        <a href="/members/mkacc"><button>Create Account?</button></a>
+      </div>
+    </div>
+
+    <div>
+      <h2>Credit:</h2>
+      <h3 align="center">Coming Soon</h3>
+    </div>
+  </body>
+</html>

@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Accounts.belongsTo(models.Members, {
-        foreignKey: "memberid",
+        foreignKey: "member_id",
         onDelete: "CASCADE",
       });
       Accounts.hasMany(models.Transactions, {
@@ -24,10 +24,20 @@ module.exports = (sequelize, DataTypes) => {
   Accounts.init(
     {
       account_type: DataTypes.STRING,
-      account_number: DataTypes.INTEGER,
-      memberid: DataTypes.INTEGER,
-      curr_balance: DataTypes.FLOAT,
-      avail_balance: DataTypes.FLOAT,
+      account_number: {
+        type: DataTypes.STRING,
+        primaryKey: true,
+      },
+      member_id: {
+        type: DataTypes.INTEGER,
+        onDelete: "CASCADE",
+        references: {
+          model: "Members",
+          key: "id",
+        },
+      },
+      curr_balance: DataTypes.DECIMAL,
+      avail_balance: DataTypes.DECIMAL,
     },
     {
       sequelize,

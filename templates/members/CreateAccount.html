@@ -1,0 +1,44 @@
+<h1>Create Account</h1>
+
+<h2>What Type of Account Would You Like To Create?</h2>
+
+<form align="center" method="POST">
+  <label>
+    Account Type:
+    <select name="account_type">
+      <option selected>Please Select Account Type..</option>
+      <option value="Checking">Checking</option>
+      <option value="Savings">Savings</option>
+    </select>
+  </label>
+  <br />
+  <label> </label>
+  <br />
+  <label>
+    Deposit From:
+    <select name="fromacct">
+      <option selected>Please Choose An Account</option>
+      ${accounts.map(a=>a.account_type ? `
+      <option value="${a.account_number}">
+        <div>
+          <p>${a.account_type} - ${a.avail_balance}</p>
+          <!-- <p>${a.account_number}</p> -->
+          <!-- <p>${a.avail_balance}</p> -->
+          <!-- <p>${a.account_routing}</p> -->
+        </div>
+      </option>
+      `:'')}
+      <option value="externalacct">External Account</option>
+      <!-- If External is chosen, display more options for account info -->
+    </select>
+  </label>
+  <br />
+  <br />
+  <label>
+    Deposit Amount:
+    <input type="text" name="depositamount" required />
+  </label>
+  <br />
+  <br />
+  <input type="submit" value="Create Account" />
+</form>

@@ -5,6 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "db:create": "npx sequelize db:create",
+    "db:migrate": "npx sequelize db:migrate",
+    "db:seed": "npx sequelize db:seed:all",
+    "db:reset": "npx sequelize db:drop && npx sequelize db:create && npx sequelize db:migrate && npx sequelize db:seed:all",
     "dev": "nodemon index.js",
     "start": "node index.js"
   },
@@ -36,6 +40,7 @@
     "express-session": "^1.17.1",
     "helmet": "^4.2.0",
     "morgan": "^1.10.0",
+    "multer": "^1.4.2",
     "pg": "^8.5.1",
     "pg-hstore": "^2.3.3",
     "sequelize": "^6.3.5",

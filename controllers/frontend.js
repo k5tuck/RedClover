@@ -2,23 +2,28 @@ const { Members } = require("../models");
 const bcrypt = require("bcryptjs");
 
 const home = (req, res) => {
-  res.render("Home");
+  res.render("frontend/Home");
+  // res.render("frontend/Login", {
+  //   partials: {
+  //     login_form: "/partials/loginform",
+  //   },
+  // });
 };
 
 const about = (req, res) => {
-  res.render("About");
+  res.render("frontend/About");
 };
 
 const contact = (req, res) => {
-  res.render("Contact");
+  res.render("frontend/Contact");
 };
 
 const products = (req, res) => {
-  res.render("Products");
+  res.render("frontend/Products");
 };
 
 const login = (req, res) => {
-  res.render("Login", {
+  res.render("frontend/Login", {
     partials: {
       login_form: "/partials/loginform",
     },
@@ -37,7 +42,7 @@ const processLogin = async (req, res) => {
     if (valid) {
       req.session.user = {
         username,
-        id: userfound.member_id,
+        id: userfound.id,
       };
       req.session.save(() => {
         res.redirect("/members");
@@ -52,7 +57,7 @@ const processLogin = async (req, res) => {
 };
 
 const signup = (req, res) => {
-  res.render("SignUp", {
+  res.render("frontend/SignUp", {
     partials: {
       signup_form: "/partials/signupform",
       countries: "/partials/countriesDropDown",
@@ -112,11 +117,11 @@ const processSignUp = async (req, res) => {
 };
 
 const error = (req, res) => {
-  res.render("Error_Page");
+  res.render("frontend/Error_Page");
 };
 
 const unauthorizedAccess = (req, res) => {
-  res.render("Unauthorized");
+  res.render("frontend/Unauthorized");
 };
 
 module.exports = {
