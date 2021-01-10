@@ -2,7 +2,7 @@ require("dotenv").config();
 const http = require("http");
 const express = require("express");
 const hostname = "localhost";
-const port = 3300;
+const port = 5002;
 const es6Renderer = require("express-es6-template-engine");
 const app = express();
 const serve = http.createServer(app);
