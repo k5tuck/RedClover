@@ -1,7 +1,8 @@
-# RedClover
+# RedClover 
+<p align="center"><tb><img  src="https://visitor-badge.glitch.me/badge?page_id=k5tuck.RedClover"/></tb></p>
 
 ## Table of Contents
-
+  
 - [About Redclover](#about-redclover)
   - [Built Using](#built-using)
   - [Diagrams and Screenshots](#diagrams-and-screenshots)
