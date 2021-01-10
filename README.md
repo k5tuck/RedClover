@@ -1,8 +1,9 @@
-# RedClover 
+# RedClover
+
 <p align="center"><tb><img  src="https://visitor-badge.glitch.me/badge?page_id=k5tuck.RedClover"/></tb></p>
 
 ## Table of Contents
-  
+
 - [About Redclover](#about-redclover)
   - [Built Using](#built-using)
   - [Diagrams and Screenshots](#diagrams-and-screenshots)
@@ -34,7 +35,17 @@ There are a couple of ideas for future iterations, with more to come in the futu
 
 ### Diagrams and Screenshots
 
+Version 1 of the Login Page and Database
+<img src="add't files/RedClover_Login.PNG" alt="Login Page">
+
+Database Design and Layout
+<img src="add't files/Tables.PNG" alt="Database Design">
+
 ### Contributors
+
+Kevin Tucker  
+[Github](http://github.com/k5tuck)
+[LinkedIn](https://www.linkedin.com/in/ktuck18)
 
 ### Contact
 
@@ -42,7 +53,14 @@ There are a couple of ideas for future iterations, with more to come in the futu
 
 ### Prerequisites
 
+- Node.js, NPM
+  In order to test you must have Node.js installed.
+
 ### Installation
+
+1. Clone repository and cd into folder
+2. Run `npm i` in the terminal to install necessary dependencies (`npm i -D` for Dev Dependencies)
+3. Run `npm run dev` and open the url address displayed in the terminal
 
 ## License
 
