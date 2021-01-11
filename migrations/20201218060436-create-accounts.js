@@ -5,9 +5,16 @@ module.exports = {
       id: {
         allowNull: false,
         autoIncrement: true,
+        primaryKey: true,
         type: Sequelize.INTEGER,
       },
       account_type: {
+        type: Sequelize.STRING,
+      },
+      member_id: {
+        type: Sequelize.INTEGER,
+      },
+      account_name: {
         type: Sequelize.STRING,
       },
       account_number: {
@@ -15,8 +22,11 @@ module.exports = {
         unique: true,
         allowNull: false,
       },
-      member_id: {
-        type: Sequelize.INTEGER,
+      routing_number: {
+        type: Sequelize.STRING,
+      },
+      transfer_account: {
+        type: Sequelize.STRING,
       },
       curr_balance: {
         type: Sequelize.DECIMAL,

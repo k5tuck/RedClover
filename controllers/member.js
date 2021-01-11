@@ -1,5 +1,4 @@
-const { INTEGER } = require("sequelize");
-const { Members, Accounts } = require("../models");
+const { Members, Accounts, Transactions } = require("../models");
 
 const globalLocals = {
   locals: {},
@@ -13,6 +12,7 @@ const globalPartials = {
 
 const home = async (req, res) => {
   const { id } = req.session.user;
+  // Making 2 DB calls - Need to reduce
   const accounts = await Accounts.findAll({
     where: {
       member_id: id,
@@ -51,8 +51,8 @@ const createAccount = async (req, res) => {
 const processAcctCreation = async (req, res) => {
   try {
     const { account_type, fromacct, depositamount } = req.body;
+    let { account_name } = req.body;
     const { id } = req.session.user;
-    console.log(fromacct);
     if (fromacct == "externalacct") {
       console.log("External Account Chosen");
     } else if (fromacct) {
@@ -81,7 +81,7 @@ const processAcctCreation = async (req, res) => {
       const finalNum = num.join("");
       return finalNum;
     };
-    console.log(rand(0, 9));
+    // console.log(rand(0, 9));
     // Choose account Type for Number Generation
     // if (account_type == "Checking") {
     //   const account_number = 1008 + rand(0, 9);
@@ -92,8 +92,15 @@ const processAcctCreation = async (req, res) => {
     // }
     const account_number =
       account_type == "Checking" ? 1008 + rand(0, 9) : 1009 + rand(0, 9);
+    account_name == "" && account_type == "Checking"
+      ? (account_name = "Personal Checking")
+      : "";
+    account_name == "" && account_type == "Savings"
+      ? (account_name = "Personal Savings")
+      : "";
     await Accounts.create({
       account_type,
+      account_name,
       account_number: account_number,
       member_id: id,
       curr_balance: depositamount,
@@ -121,6 +128,24 @@ const processAcctCreation = async (req, res) => {
   // };
 };
 
+const acctDetails = async (req, res) => {
+  const { id } = req.params;
+  // Making 2 DB calls - Need to reduce
+  const acctinfo = await Accounts.findByPk(id);
+  const transaction = await Transactions.findAll({
+    where: {
+      account_number: acctinfo.account_number,
+    },
+  });
+  res.render("members/AccountDetails", {
+    locals: {
+      acctinfo,
+      transaction,
+    },
+    ...globalPartials,
+  });
+};
+
 // Logout Function
 const logout = (req, res) => {
   console.log("Logging Out");
@@ -133,5 +158,6 @@ module.exports = {
   home,
   createAccount,
   processAcctCreation,
+  acctDetails,
   logout,
 };

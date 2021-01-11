@@ -8,6 +8,7 @@ router
   .get("/", memberController.home)
   .get("/mkacc", memberController.createAccount)
   .post("/mkacc", memberController.processAcctCreation)
+  .get("/:id/acct", memberController.acctDetails)
   .get("/logout", memberController.logout);
 
 module.exports = router;

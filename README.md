@@ -24,8 +24,19 @@ to create a monolithic architecture to get a basic understaning of how banks kin
 
 There are a couple of ideas for future iterations, with more to come in the future:
 
-- Create a Microservice Architecture
-- Eventually re-implement the server into a Go "version"
+#### Short Term
+
+- [x] Make Account Transaction Template Page
+- [ ] Create Transactions - Deposits/Withdrawals
+- [ ] Transfer "Menu"
+- [ ] Add (Save) Accounts to Transfers "List"
+- [ ] Update/Delete Accounts
+- [ ] Update/Delete Member Details
+
+#### Long Term
+
+- [ ] Create a Microservice Architecture
+- [ ] Eventually re-implement the server into a Go "version"
 
 ### Built Using
 

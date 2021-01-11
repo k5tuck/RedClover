@@ -24,10 +24,6 @@ module.exports = (sequelize, DataTypes) => {
   Accounts.init(
     {
       account_type: DataTypes.STRING,
-      account_number: {
-        type: DataTypes.STRING,
-        primaryKey: true,
-      },
       member_id: {
         type: DataTypes.INTEGER,
         onDelete: "CASCADE",
@@ -36,6 +32,12 @@ module.exports = (sequelize, DataTypes) => {
           key: "id",
         },
       },
+      account_name: DataTypes.STRING,
+      account_number: {
+        type: DataTypes.STRING,
+      },
+      routing_number: DataTypes.STRING,
+      transfer_account: DataTypes.STRING,
       curr_balance: DataTypes.DECIMAL,
       avail_balance: DataTypes.DECIMAL,
     },

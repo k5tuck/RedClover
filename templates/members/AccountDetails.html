@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RedClover - AcctDetails</title>
+  </head>
+  <body>
+    <div>
+      <h1>${acctinfo.account_name}</h1>
+      <h5>${acctinfo.account_type} - Acct#: ${acctinfo.account_number}</h5>
+      <h5 align="right"></h5>
+    </div>
+    <div>
+      ${transaction.map(t=>`
+      <div>
+        <h3>${t.merchant}</h3>
+        <h4 align="right">${t.amount}</h4>
+        <br />
+        <p>${t.date}</p>
+        <p align="right">Available Balance: ${t.avail_balance}</p>
+      </div>
+      `).join("")}
+    </div>
+    <a href="/members"><button>Go Back</button></a>
+    <a href="/members/logout"><button>Logout</button></a>
+  </body>
+</html>

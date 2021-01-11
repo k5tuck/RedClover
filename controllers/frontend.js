@@ -31,27 +31,39 @@ const login = (req, res) => {
 };
 
 const processLogin = async (req, res) => {
-  const { username, password } = req.body;
-  const userfound = await Members.findOne({
-    where: { username },
-  });
-  if (userfound) {
-    console.log("Found User");
-    const hash = userfound.hash;
-    const valid = await bcrypt.compareSync(password, hash);
-    if (valid) {
-      req.session.user = {
-        username,
-        id: userfound.id,
-      };
-      req.session.save(() => {
-        res.redirect("/members");
-      });
+  const { password } = req.body;
+  let { username } = req.body;
+  username = username.toLowerCase().replace(" ", "");
+  try {
+    const userfound = await Members.findOne({
+      where: { username },
+    });
+    if (userfound) {
+      console.log("Found User");
+      const hash = userfound.hash;
+      const valid = await bcrypt.compareSync(password, hash);
+      if (valid) {
+        req.session.user = {
+          username,
+          id: userfound.id,
+        };
+        req.session.save(() => {
+          res.redirect("/members");
+        });
+      } else {
+        console.log("Password Incorrect! Try Again");
+        res.redirect("/login");
+      }
     } else {
-      console.log("User doesn't exist");
-      res.redirect("/login");
+      console.log("User Not Found");
+      res.redirect("/signup");
+      throw Error;
     }
+  } catch (e) {
+    console.log("Error Occurred");
+    console.log(e);
   }
+
   // Use req data to verify info against DB
   // res.render("");
 };
@@ -68,7 +80,6 @@ const signup = (req, res) => {
 
 const processSignUp = async (req, res) => {
   const {
-    username,
     password,
     verifyPassword,
     firstname,
@@ -85,6 +96,8 @@ const processSignUp = async (req, res) => {
     identification,
     idInput,
   } = req.body;
+  let { username } = req.body;
+  username = username.toLowerCase().replace(" ", "");
   const salt = await bcrypt.genSaltSync(11);
   const hash = await bcrypt.hashSync(password, salt);
   const hashSSN = await bcrypt.hashSync(ssn, salt);
@@ -110,6 +123,7 @@ const processSignUp = async (req, res) => {
   } catch (e) {
     if (e.name === "SequelizeUniqueConstraintError") {
       console.log("username is taken");
+      console.log("Try Again");
       res.redirect("/signup");
     }
     res.redirect("/signup");
