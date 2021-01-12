@@ -6,14 +6,20 @@
     <title>RedClover - Home</title>
   </head>
   <body>
-    <div>
-      <h1 align="left">Welcome ${member.firstname} ${member.lastname}!</h1>
+    <span>
+      <h1 style="display: inline;" align="left">Welcome ${member.firstname} ${member.lastname}!</h1>
       <div align="right">
+        <a href="/members/mkacc">
+          <button>Create Account</button>
+        </a>
+        <a href="/members/#">
+          <button>Transfer</button>
+        </a>
         <a href="/members/logout">
           <button value="submit">Logout</button>
         </a>
       </div>
-    </div>
+    </span>
     
     <div>
       <h2>Credit:</h2>
@@ -22,43 +28,45 @@
 
     <div>
       <h2>Savings:</h2>
-      ${accounts.map(a => a.account_type=="Savings" ? `
       <div>
+      ${savings ? savings.map(a => `
         <div>
           <a href="/members/${a.id}/acct">
             <div>
                 <a href="/members/${a.id}/acct">
                   <h3>${a.account_name}</h3>
+                  <p>Account#: ${a.account_number} Routing#: ${a.account_routing}</p>
                 </a>
-                <p>Account#: ${a.account_number} Routing#: ${a.account_routing}</p>
                 <h3 align="right">Available Balance: ${a.avail_balance}</h3>
               </div>
           </div>
-      ` : `
-      `).join("")}
+      `).join("") : `
       <div align="center">
         <h3>You have No Savings Accounts</h3>
         <a href="/members/mkacc"><button>Create Account?</button></a>
       </div>
+      `}
     </div>
 
     <div>
       <h2>Checkings:</h2>
-      ${accounts.map(a=> a.account_type=="Checking" ? `
-      <div>
+      ${checking ? checking.map(a => `
         <div>
-            <a href="/members/${a.id}/acct">
-              <h3>${a.account_name}</h3>
-            </a>
-            <p>Account#: ${a.account_number} Routing#: ${a.account_routing}</p>
-            <h3 align="right">Available Balance: ${a.avail_balance}</h3>
+          <a href="/members/${a.id}/acct">
+            <div>
+                <a href="/members/${a.id}/acct">
+                  <h3>${a.account_name}</h3>
+                  <p>Account#: ${a.account_number} Routing#: ${a.account_routing}</p>
+                </a>
+                <h3 align="right">Available Balance: ${a.avail_balance}</h3>
+              </div>
           </div>
-      </div>
-      ` : '').join("")}
+      `).join("") : `
       <div align="center">
-        <h3>You Have No Checking Accounts</h3>
+        <h3>You have No Checking Accounts</h3>
         <a href="/members/mkacc"><button>Create Account?</button></a>
       </div>
+      `}
     </div>
 
   </body>

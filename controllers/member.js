@@ -25,14 +25,28 @@ const home = async (req, res) => {
     },
   });
   const member = await Members.findByPk(id);
+  let checking = [];
+  let savings = [];
+  accounts.map((a) =>
+    a.account_type == "Checking" ? checking.push(a) : savings.push(a)
+  );
+  if (checking == 0) {
+    checking = false;
+  }
+  if (savings == 0) {
+    savings = false;
+  }
+
   res.render("members/Home", {
     locals: {
       member,
-      accounts,
+      savings,
+      checking,
     },
     ...globalPartials,
   });
 };
+
 const createAccount = async (req, res) => {
   const { id } = req.session.user;
   const accounts = await Accounts.findAll({
@@ -67,6 +81,15 @@ const processAcctCreation = async (req, res) => {
         avail_balance: withdrawnAvail,
         curr_balance: withdrawnCurr,
       });
+      // Adding Transactions
+      // From Account
+      await Transactions.create({
+        date: new Date(),
+        account_number: fromacct,
+        amount: depositamount,
+        merchant: "Transfer Out",
+        avail_balance: withdrawnAvail,
+      });
     } else {
       console.log("Account not specified");
       throw Error;
@@ -81,29 +104,38 @@ const processAcctCreation = async (req, res) => {
       const finalNum = num.join("");
       return finalNum;
     };
-    // console.log(rand(0, 9));
-    // Choose account Type for Number Generation
-    // if (account_type == "Checking") {
-    //   const account_number = 1008 + rand(0, 9);
-    //   return account_number;
-    // } else if (account_type == "Savings") {
-    //   const account_number = 1009 + rand(0, 9);
-    //   return account_number;
-    // }
     const account_number =
       account_type == "Checking" ? 1008 + rand(0, 9) : 1009 + rand(0, 9);
-    account_name == "" && account_type == "Checking"
-      ? (account_name = "Personal Checking")
-      : "";
-    account_name == "" && account_type == "Savings"
-      ? (account_name = "Personal Savings")
-      : "";
+    const AcctName = () => {
+      if (account_name == "" && account_type == "Checking") {
+        account_name = "Personal Checking";
+      } else if (account_name == "" && account_type == "Savings") {
+        account_name = "Personal Savings";
+      }
+      //   account_name == "" && account_type == "Checking" ? (account_name = "Personal Checking")
+      //   : "";
+      // account_name == "" && account_type == "Savings"
+      //   ? (account_name = "Personal Savings")
+      //   : "";
+      return account_name;
+    };
+
+    // Creating New Account
     await Accounts.create({
       account_type,
-      account_name,
-      account_number: account_number,
+      account_name: AcctName(),
+      account_number,
       member_id: id,
       curr_balance: depositamount,
+      avail_balance: depositamount,
+    });
+
+    // Adding Transactions To New Account
+    await Transactions.create({
+      date: new Date(),
+      account_number,
+      amount: depositamount,
+      merchant: "Transfer In",
       avail_balance: depositamount,
     });
     res.redirect("/members");
@@ -112,20 +144,6 @@ const processAcctCreation = async (req, res) => {
     console.log(e);
     res.redirect("/members");
   }
-  // const account_number = () => {
-  //   rand(0, 9);
-  //   const finalNum = num.join("");
-  //   // Choose account Type for Number Generation
-  //   if (account_type == "Checking") {
-  //     const account_number = 1008 + finalNum;
-  //     console.log(account_number);
-  //     return account_number;
-  //   } else if (account_type == "Savings") {
-  //     const account_number = 1009 + finalNum;
-  //     console.log(account_number);
-  //     return account_number;
-  //   }
-  // };
 };
 
 const acctDetails = async (req, res) => {
@@ -137,10 +155,17 @@ const acctDetails = async (req, res) => {
       account_number: acctinfo.account_number,
     },
   });
+  // Need To Fix Transaction Display Type (Displaying Deposit or Withdrawal)
+  const transType =
+    transaction.avail_balance - transaction.amount < transaction.avail_balance
+      ? "Withdrawal"
+      : "Deposit";
+  // =======================================================================
   res.render("members/AccountDetails", {
     locals: {
       acctinfo,
       transaction,
+      transType,
     },
     ...globalPartials,
   });

@@ -14,7 +14,7 @@ module.exports = {
     return await queryInterface.bulkInsert("Members", [
       {
         username: "blackjack",
-        hash: "",
+        hash: "$2a$10$r9d2wcJswYQV4674pMku2eah0FLyRU/NI0skNoA4G7H5u3lnj56S2",
         firstname: "Jack",
         lastname: "Black",
         address: "213 Light Way",
@@ -33,7 +33,7 @@ module.exports = {
       },
       {
         username: "blackclover",
-        hash: "",
+        hash: "$2a$10$1HMGOJn/cpB.nZzwC6ATmucQhOjr14Aa8CaACjQMom2vV.Cl.cvJa",
         firstname: "Clover",
         lastname: "Black",
         address: "598 Green St",
@@ -52,7 +52,7 @@ module.exports = {
       },
       {
         username: "blackspade",
-        hash: "",
+        hash: "$2a$10$uhu3xORPrxarT1KsH.4Yvugemz6isD3aPNi95xOpP1jr6O4GbGgYC",
         firstname: "Spade",
         lastname: "Black",
         address: "893 Blake Dr",

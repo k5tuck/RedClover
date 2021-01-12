@@ -27,7 +27,8 @@ There are a couple of ideas for future iterations, with more to come in the futu
 #### Short Term
 
 - [x] Make Account Transaction Template Page
-- [ ] Create Transactions - Deposits/Withdrawals
+- [x] Create Transactions
+- [ ] Edit Deposits/Withdrawals on Details Page
 - [ ] Transfer "Menu"
 - [ ] Add (Save) Accounts to Transfers "List"
 - [ ] Update/Delete Accounts
@@ -35,8 +36,8 @@ There are a couple of ideas for future iterations, with more to come in the futu
 
 #### Long Term
 
+- [ ] Eventually re-implement server into a Go "version"
 - [ ] Create a Microservice Architecture
-- [ ] Eventually re-implement the server into a Go "version"
 
 ### Built Using
 

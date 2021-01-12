@@ -7,18 +7,22 @@
   </head>
   <body>
     <div>
-      <h1>${acctinfo.account_name}</h1>
-      <h5>${acctinfo.account_type} - Acct#: ${acctinfo.account_number}</h5>
+      <h1 style="display: inline">${acctinfo.account_name}</h1>
+      <h5 style="display: inline">
+        ${acctinfo.account_type} - Acct#: ${acctinfo.account_number}
+      </h5>
       <h5 align="right"></h5>
     </div>
     <div>
       ${transaction.map(t=>`
       <div>
-        <h3>${t.merchant}</h3>
-        <h4 align="right">${t.amount}</h4>
+        <h3 style="display: inline">${t.merchant}</h3>
+        <h3 style="display: inline; float: right">
+          Available Balance: ${t.avail_balance}
+        </h3>
         <br />
+        <h4 style="display: inline">${transType}: ${t.amount}</h4>
         <p>${t.date}</p>
-        <p align="right">Available Balance: ${t.avail_balance}</p>
       </div>
       `).join("")}
     </div>
