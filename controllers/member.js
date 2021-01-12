@@ -171,6 +171,61 @@ const acctDetails = async (req, res) => {
   });
 };
 
+const transfer = async (req, res) => {
+  const { id } = req.session.user;
+  const accounts = await Accounts.findAll({
+    where: {
+      member_id: id,
+    },
+  });
+  res.render("members/Transfer", {
+    locals: {
+      accounts,
+    },
+    // ...globalPartials
+  });
+};
+
+const processTransfer = async (req, res) => {
+  const { fromacct, toacct, amount } = req.body;
+  const { id } = req.session.user;
+  const withdrawnAcct = await Accounts.findByPk(fromacct);
+  const depositAcct = await Accounts.findByPk(toacct);
+  withdrawnAcct.avail_balance -= amount;
+  withdrawnAcct.curr_balance -= amount;
+  // ----------- Wrong ------------ ???
+  depositAcct.avail_balance = depositAcct.avail_balance + amount;
+  // ---------------------------------
+
+  // Updating Accounts in DB
+  await withdrawnAcct.update({
+    avail_balance: withdrawnAcct.avail_balance,
+    curr_balance: withdrawnAcct.curr_balance,
+  });
+  await depositAcct.update({
+    avail_balance: depositAcct.avail_balance,
+    curr_balance: depositAcct.curr_balance,
+  });
+  // From Transactions
+  await Transactions.create({
+    account_number: withdrawnAcct.account_number,
+    date: new Date(),
+    merchant: "Transfer From",
+    amount,
+    avail_balance: withdrawnAcct.avail_balance,
+  });
+  // To Transactions
+  await Transactions.create({
+    account_number: depositAcct.account_number,
+    date: new Date(),
+    merchant: "Transfer To",
+    amount,
+    avail_balance: depositAcct.avail_balance,
+  });
+
+  res.redirect("/members");
+};
+
 // Logout Function
 const logout = (req, res) => {
   console.log("Logging Out");
@@ -184,5 +239,7 @@ module.exports = {
   createAccount,
   processAcctCreation,
   acctDetails,
+  transfer,
+  processTransfer,
   logout,
 };

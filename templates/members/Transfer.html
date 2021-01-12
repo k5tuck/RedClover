@@ -1,0 +1,63 @@
+<span>
+  <h1 style="display: inline" align="left">Transfer</h1>
+  <div align="right">
+    <a href="/members">
+      <button>Home</button>
+    </a>
+    <a href="/members/logout">
+      <button value="submit">Logout</button>
+    </a>
+  </div>
+</span>
+
+<h2>Make a Transfer</h2>
+
+<form align="center" method="POST">
+  <label>
+    From:
+    <select name="fromacct">
+      <option selected>Please Choose An Account</option>
+      ${accounts.map(a=>a.account_type ? `
+      <option value="${a.id}">
+        <div>
+          <p>${a.account_name}</p>
+          <p>- ${a.avail_balance} - ${a.account_type}</p>
+          <!-- <p>${a.account_number}</p> -->
+          <!-- <p>${a.account_routing}</p> -->
+        </div>
+      </option>
+      `:'')}
+      <option value="externalacct">External Account</option>
+      <!-- If External is chosen, display more options for account info -->
+    </select>
+  </label>
+  <br />
+  <br />
+  <label>
+    To:
+    <select name="toacct">
+      <option selected>Please Choose An Account</option>
+      ${accounts.map(a=>a.account_type ? `
+      <option value="${a.id}">
+        <div>
+          <p>${a.account_name}</p>
+          <p>- ${a.avail_balance} - ${a.account_type}</p>
+          <!-- <p>${a.account_number}</p> -->
+          <!-- <p>${a.account_routing}</p> -->
+        </div>
+      </option>
+      `:'')}
+      <option value="externalacct">External Account</option>
+      <!-- If External is chosen, display more options for account info -->
+    </select>
+  </label>
+  <br />
+  <br />
+  <label>
+    Amount:
+    <input type="number" name="amount" required />
+  </label>
+  <br />
+  <br />
+  <button value="submit">Transfer</button>
+</form>

@@ -8,6 +8,8 @@ router
   .get("/", memberController.home)
   .get("/mkacc", memberController.createAccount)
   .post("/mkacc", memberController.processAcctCreation)
+  .get("/transfer", memberController.transfer)
+  .post("/transfer", memberController.processTransfer)
   .get("/:id/acct", memberController.acctDetails)
   .get("/logout", memberController.logout);
 

@@ -29,7 +29,8 @@ There are a couple of ideas for future iterations, with more to come in the futu
 - [x] Make Account Transaction Template Page
 - [x] Create Transactions
 - [ ] Edit Deposits/Withdrawals on Details Page
-- [ ] Transfer "Menu"
+- [x] Transfer "Menu"
+- [ ] Fix Deposit Amount Error
 - [ ] Add (Save) Accounts to Transfers "List"
 - [ ] Update/Delete Accounts
 - [ ] Update/Delete Member Details
